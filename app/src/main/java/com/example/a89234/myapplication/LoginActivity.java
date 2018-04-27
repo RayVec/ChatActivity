@@ -34,6 +34,7 @@ public class LoginActivity extends Activity {
 				}
 			}
 	    });
+
 	    ManageActivity.addActiviy("LoginActivity", this);
 	}
 	
@@ -46,9 +47,8 @@ public class LoginActivity extends Activity {
 		//登陆成功
 		if(b){
 			//转到主界面
-			Intent intent=new Intent(LoginActivity.this,ChatActivity.class);
+			Intent intent=new Intent(LoginActivity.this,RecentActivity.class);
 			intent.putExtra("account", Integer.parseInt(accountEt.getText().toString()));
-			intent.putExtra("receiver",Integer.parseInt(receiverEt.getText().toString()));
 			startActivity(intent);
 		}else {
 			Toast.makeText(this, "登陆失败！", Toast.LENGTH_SHORT).show();

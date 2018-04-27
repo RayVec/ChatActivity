@@ -30,6 +30,7 @@ public class ClientConServerThread extends Thread {
 				m=(ChatMessage) ois.readObject();
 				if(m.getType().equals(ChatMessageType.COM_MES)){//如果是聊天内容
 					//把从服务器获得的消息通过广播发送
+					//广播内容依次为发送者，发送者昵称，发送者头像，内容，时间
 					Intent intent = new Intent("org.yhn.yq.mes");
 					String[] message=new String[]{
 						m.getSender()+"",

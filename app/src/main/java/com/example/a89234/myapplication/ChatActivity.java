@@ -29,6 +29,8 @@ public class ChatActivity extends Activity {
     ListView chatListView;
     private int myAccount;
     private int deskAccount;
+    private String nick;
+    IntentFilter myIntentFilter;
     public List<ChatEntity> chatEntityList=new ArrayList<ChatEntity>();//所有聊天内容
     public static int[] avatar=new int[]{R.drawable.avatar_default,R.drawable.h001,R.drawable.h002,R.drawable.h003,
             R.drawable.h004,R.drawable.h005,R.drawable.h006};
@@ -43,14 +45,17 @@ public class ChatActivity extends Activity {
         //这里获取当前聊天者的账号，目前可以使用的有1，2，3，4，5五个数字
         myAccount=getIntent().getIntExtra("account", 0);
         //这里指定接收圆桌的圆桌号，目前只开通1234
+        nick=getIntent().getStringExtra("nick");
         deskAccount=getIntent().getIntExtra("receiver",0);
-        //设置top面板信息,获取从上一个activity传递过来的参数
         ImageView avatar_iv=(ImageView) findViewById(R.id.chat_top_avatar);
         avatar_iv.setImageResource(avatar[1]);   //设置头像
         TextView nick_tv=(TextView) findViewById(R.id.chat_top_nick);
-        nick_tv.setText("圆桌号1234，官方唯一指定");
-
+        nick_tv.setText(nick);
         et_input=(EditText) findViewById(R.id.et_input);
+        /**
+         * 获取当前圆桌所有的消息
+         *
+         */
         findViewById(R.id.ib_send).setOnClickListener(new OnClickListener(){
             public void onClick(View v) {
                 ObjectOutputStream oos;
@@ -69,7 +74,7 @@ public class ChatActivity extends Activity {
                     m.setType(ChatMessageType.COM_MES);//普通信息包
                     m.setSender(myAccount);          //设置账号
                     m.setSenderNick("ray");  //设置昵称
-                    m.setSenderAvatar(avatar[1]);   //设置头像
+                    m.setSenderAvatar(1);   //设置头像
                     m.setReceiver(deskAccount);          //设置接收者的账号
                     m.setContent(chatContent);           //设置消息内容
                     m.setSendTime(MyTime.geTimeNoS());    //设置发送的时间
@@ -91,7 +96,7 @@ public class ChatActivity extends Activity {
             }
         });
         //注册广播
-        IntentFilter myIntentFilter = new IntentFilter();
+         myIntentFilter = new IntentFilter();
         myIntentFilter.addAction("org.yhn.yq.mes");
         br=new MyBroadcastReceiver();    //创建一个广播接收器
         registerReceiver(br, myIntentFilter);
@@ -102,7 +107,16 @@ public class ChatActivity extends Activity {
         unregisterReceiver(br);
         super.finish();
     }
-
+    @Override
+    public void onStop(){
+        unregisterReceiver(br);
+        super.onStop();
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        registerReceiver(br,myIntentFilter);
+    }
     //广播接收器
     public class MyBroadcastReceiver extends BroadcastReceiver {
         @Override

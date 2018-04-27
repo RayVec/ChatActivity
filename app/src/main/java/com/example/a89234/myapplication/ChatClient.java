@@ -18,12 +18,13 @@ public class ChatClient {
 	public ChatClient(Context context){
 		this.context=context;
 	}
+	//在后台注册当前账号的线程
 	public boolean sendLoginInfo(Object obj){
 		boolean b=false;
 		try {
 			s=new Socket();
 			try{
-				s.connect(new InetSocketAddress("118.24.39.31",80),2000);
+				s.connect(new InetSocketAddress("192.168.43.112",5469),2000);
 			}catch(SocketTimeoutException e){
 				//连接服务器超时
 				return false;
