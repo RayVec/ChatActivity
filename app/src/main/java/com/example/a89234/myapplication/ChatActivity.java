@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -56,6 +57,10 @@ public class ChatActivity extends Activity {
          * 获取当前圆桌所有的消息
          *
          */
+        myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("org.yhn.yq.mes");
+        br=new MyBroadcastReceiver();    //创建一个广播接收器
+        ManageActivity.addActiviy("ChatActivity", this);
         findViewById(R.id.ib_send).setOnClickListener(new OnClickListener(){
             public void onClick(View v) {
                 ObjectOutputStream oos;
@@ -85,6 +90,7 @@ public class ChatActivity extends Activity {
                      */
                     oos = new ObjectOutputStream(ManageClientConServer.getClientConServerThread(myAccount).getS().getOutputStream());
                     oos.writeObject(m);
+                    Log.d("send",m.getContent());
                     //更新聊天内容
                     updateChatView(new ChatEntity(
                             chatContent,
@@ -96,21 +102,13 @@ public class ChatActivity extends Activity {
             }
         });
         //注册广播
-         myIntentFilter = new IntentFilter();
-        myIntentFilter.addAction("org.yhn.yq.mes");
-        br=new MyBroadcastReceiver();    //创建一个广播接收器
-        registerReceiver(br, myIntentFilter);
-        ManageActivity.addActiviy("ChatActivity", this);
-    }
-    @Override
-    public void finish() {
-        unregisterReceiver(br);
-        super.finish();
+
     }
     @Override
     public void onStop(){
-        unregisterReceiver(br);
         super.onStop();
+        unregisterReceiver(br);
+
     }
     @Override
     public void onResume(){

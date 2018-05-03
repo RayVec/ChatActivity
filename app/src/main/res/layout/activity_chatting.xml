@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_above="@+id/relativeLayout">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:orientation="horizontal"
+            android:elevation="2dp"
+            android:background="@color/bg_white">
+            <!--<com.example.myh.team.waterfallSupport.CircleImageView
+                android:id="@+id/chat_top_avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="12dp"
+                android:background="@mipmap/head" />-->
+
+            <TextView
+                android:id="@+id/chat_top_nick"
+                android:layout_height="match_parent"
+                android:layout_width="326dp"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingLeft="20dp"
+                android:text="ACM竞赛"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:src="@drawable/rtable"/>
+        </LinearLayout>
+        <ListView
+            android:id="@+id/lv_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_background"
+            android:divider="@null">
+        </ListView>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fbutton_prepare"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="420dp"
+        android:src="@drawable/prepare1"
+        app:backgroundTint="@color/color_fbutton"
+        app:rippleColor="@color/cardview_dark_background"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@color/bg_white"
+        android:id="@+id/relativeLayout">
+
+        <ImageView
+            android:id="@+id/iv_biaoqin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="2dip" />
+
+        <Button
+            android:id="@+id/ib_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/bg_white"
+            android:text="发 送"
+            android:textColor="@color/color_fbutton"/>
+
+        <EditText
+            android:id="@+id/et_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dip"
+            android:paddingLeft="10dp"
+            android:background="@drawable/input_normal"
+            android:hint="输入"
+            android:layout_toStartOf="@+id/ib_send"
+            android:layout_toLeftOf="@+id/ib_send">
+
+            <requestFocus />
+        </EditText>
+    </RelativeLayout>
+
+</RelativeLayout>

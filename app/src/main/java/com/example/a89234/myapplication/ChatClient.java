@@ -24,7 +24,7 @@ public class ChatClient {
 		try {
 			s=new Socket();
 			try{
-				s.connect(new InetSocketAddress("192.168.43.112",5469),2000);
+				s.connect(new InetSocketAddress("118.24.39.31",5469),2000);
 			}catch(SocketTimeoutException e){
 				//连接服务器超时
 				return false;
