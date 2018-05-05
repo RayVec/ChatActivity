@@ -52,6 +52,4 @@ public class ChatMessage implements Serializable{
 	public void setSendTime(String sendTime) {
 		this.sendTime = sendTime;
 	}
-	
-	
 }

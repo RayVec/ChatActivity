@@ -14,11 +14,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,10 +30,12 @@ public class ChatActivity extends Activity {
     public static String myInfo;
     EditText et_input;
     private String chatContent;//消息内容
-    ListView chatListView;
+    private ListView chatListView;
+    private FloatingActionButton floatingButton;
     private int myAccount;
     private int deskAccount;
     private String nick;
+    private ImageButton deskButton;
     IntentFilter myIntentFilter;
     public List<ChatEntity> chatEntityList=new ArrayList<ChatEntity>();//所有聊天内容
     public static int[] avatar=new int[]{R.drawable.avatar_default,R.drawable.h001,R.drawable.h002,R.drawable.h003,
@@ -40,7 +45,7 @@ public class ChatActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);//设置不需要标题
-        setContentView(R.layout.activity_main);   //设置主界面
+        setContentView(R.layout.activity_chatting);   //设置主界面
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         //这里获取当前聊天者的账号，目前可以使用的有1，2，3，4，5五个数字
@@ -53,6 +58,10 @@ public class ChatActivity extends Activity {
         TextView nick_tv=(TextView) findViewById(R.id.chat_top_nick);
         nick_tv.setText(nick);
         et_input=(EditText) findViewById(R.id.et_input);
+        floatingButton=findViewById(R.id.fbutton_prepare);
+        floatingButton.setImageResource(R.drawable.prepare1);
+        deskButton=findViewById(R.id.deskButton);
+        deskButton.setImageResource(R.drawable.rtable);
         /**
          * 获取当前圆桌所有的消息
          *

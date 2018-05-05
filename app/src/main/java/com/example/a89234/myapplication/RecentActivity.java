@@ -34,7 +34,7 @@ public class RecentActivity extends Activity{
 		myIntentFilter = new IntentFilter();
         myIntentFilter.addAction("org.yhn.yq.mes");
         br=new MyBroadcastReceiver();
-		recentEntityList.add(new RecentEntity(1,1234,"公共测试圆桌"," "," ",false));
+		recentEntityList.add(new RecentEntity(1,1234,"公共测试圆桌"," "," ",0));
 		listView = (ListView) findViewById(R.id.lv_recent);
 		listView.setAdapter(new RecentAdapter(RecentActivity.this,recentEntityList));
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -58,7 +58,6 @@ public class RecentActivity extends Activity{
 	@Override
 	public void onResume(){
 		super.onResume();
-
 		registerReceiver(br,myIntentFilter);
 	}
 
@@ -71,10 +70,14 @@ public class RecentActivity extends Activity{
 		    Toast.makeText(context,mes[1]+" : "+mes[3], Toast.LENGTH_SHORT).show();
 			//更新最近会话列表， 检测chatEntityList，防止同一个好友的消息出现多个会话实体
 		    Iterator it=recentEntityList.iterator();
+		    int unRead=0;
 		    if(recentEntityList!=null && recentEntityList.size()!=0){
 		    	while(it.hasNext()){
 		    		RecentEntity re=(RecentEntity) it.next();
-		    		recentEntityList.remove(re);
+		    		if(re.getAccount()==1234) {
+		    			unRead=re.getUnRead()+1;
+						recentEntityList.remove(re);
+					}
 		    	}
 		    }
 		    recentEntityList.add(new RecentEntity(
@@ -82,8 +85,8 @@ public class RecentActivity extends Activity{
 		    		1234,
 		    		"公共测试圆桌",
 		    		mes[1]+" : "+mes[3],
-		    		mes[4], 
-		    		false));
+		    		mes[4],
+					unRead));
 		    listView.setAdapter(new RecentAdapter(RecentActivity.this, recentEntityList));
 		}
 	}

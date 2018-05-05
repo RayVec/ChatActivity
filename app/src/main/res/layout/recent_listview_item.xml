@@ -76,7 +76,6 @@
                 android:layout_width="33dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="6dp"
-                android:src="@drawable/message_count1"
                 android:layout_weight="0.14"/>
 
             <TextView

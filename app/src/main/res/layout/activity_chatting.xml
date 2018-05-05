@@ -6,21 +6,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_above="@+id/relativeLayout">
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dip"
             android:orientation="horizontal"
             android:elevation="2dp"
             android:background="@color/bg_white">
-            <!--<com.example.myh.team.waterfallSupport.CircleImageView
+            <ImageView
                 android:id="@+id/chat_top_avatar"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="12dp"
-                android:background="@mipmap/head" />-->
+                android:layout_marginLeft="12dp" />-->
 
             <TextView
                 android:id="@+id/chat_top_nick"
@@ -33,6 +31,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"/>
             <ImageButton
+                android:id="@+id/deskButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
@@ -47,6 +46,8 @@
         </ListView>
     </LinearLayout>
 
+
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fbutton_prepare"
         android:layout_width="70dp"
@@ -54,9 +55,8 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
         android:layout_marginTop="420dp"
-        android:src="@drawable/prepare1"
         app:backgroundTint="@color/color_fbutton"
-        app:rippleColor="@color/cardview_dark_background"/>
+        app:rippleColor="@color/cardview_light_background"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="38dip"
@@ -95,7 +95,6 @@
             android:hint="输入"
             android:layout_toStartOf="@+id/ib_send"
             android:layout_toLeftOf="@+id/ib_send">
-
             <requestFocus />
         </EditText>
     </RelativeLayout>

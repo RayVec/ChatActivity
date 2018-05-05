@@ -6,15 +6,15 @@ public class RecentEntity {
 	private String nick;
 	private String content;
 	private String time;
-	private boolean isRead;
+	private int unRead;
 
-	public RecentEntity(int avatar,int account,String nick,String content,String time,boolean isRead){
+	public RecentEntity(int avatar,int account,String nick,String content,String time,int unRead){
 		this.avatar=avatar;
 		this.account=account;
 		this.nick=nick;
 		this.content=content;
 		this.time=time;
-		this.isRead=isRead;
+		this.unRead=unRead;
 	}
 
 	public int getAvatar() {
@@ -57,11 +57,7 @@ public class RecentEntity {
 		this.time = time;
 	}
 
-	public boolean isRead() {
-		return isRead;
-	}
+	public int getUnRead(){return unRead;}
 
-	public void setRead(boolean isRead) {
-		this.isRead = isRead;
-	}
+	public void setUnRead(int unRead){this.unRead=unRead;}
 }
