@@ -32,8 +32,8 @@ public class ChatActivity extends Activity {
     private String chatContent;//消息内容
     private ListView chatListView;
     private FloatingActionButton floatingButton;
-    private int myAccount;
-    private int deskAccount;
+    private String myAccount;
+    private String deskAccount;
     private String nick;
     private ImageButton deskButton;
     IntentFilter myIntentFilter;
@@ -49,10 +49,10 @@ public class ChatActivity extends Activity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         //这里获取当前聊天者的账号，目前可以使用的有1，2，3，4，5五个数字
-        myAccount=getIntent().getIntExtra("account", 0);
+        myAccount=getIntent().getStringExtra("account");
         //这里指定接收圆桌的圆桌号，目前只开通1234
         nick=getIntent().getStringExtra("nick");
-        deskAccount=getIntent().getIntExtra("receiver",0);
+        deskAccount=getIntent().getStringExtra("receiver");
         ImageView avatar_iv=(ImageView) findViewById(R.id.chat_top_avatar);
         avatar_iv.setImageResource(avatar[1]);   //设置头像
         TextView nick_tv=(TextView) findViewById(R.id.chat_top_nick);

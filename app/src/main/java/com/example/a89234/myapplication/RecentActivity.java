@@ -21,7 +21,7 @@ public class RecentActivity extends Activity{
 	ListView listView;
 	List<RecentEntity> recentEntityList=new ArrayList<RecentEntity>();
 	String[] mes;
-	int myAccount;
+	String myAccount;
 	MyBroadcastReceiver br;
 	IntentFilter myIntentFilter;
 	
@@ -29,12 +29,12 @@ public class RecentActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_recent);
-		myAccount=getIntent().getIntExtra("account",0);
+		myAccount=getIntent().getStringExtra("account");
 		//注册广播
 		myIntentFilter = new IntentFilter();
         myIntentFilter.addAction("org.yhn.yq.mes");
         br=new MyBroadcastReceiver();
-		recentEntityList.add(new RecentEntity(1,1234,"公共测试圆桌"," "," ",0));
+		recentEntityList.add(new RecentEntity(1,"1234","公共测试圆桌"," "," ",0));
 		listView = (ListView) findViewById(R.id.lv_recent);
 		listView.setAdapter(new RecentAdapter(RecentActivity.this,recentEntityList));
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -74,7 +74,7 @@ public class RecentActivity extends Activity{
 		    if(recentEntityList!=null && recentEntityList.size()!=0){
 		    	while(it.hasNext()){
 		    		RecentEntity re=(RecentEntity) it.next();
-		    		if(re.getAccount()==1234) {
+		    		if(re.getAccount().equals("1234")) {
 		    			unRead=re.getUnRead()+1;
 						recentEntityList.remove(re);
 					}
@@ -82,7 +82,7 @@ public class RecentActivity extends Activity{
 		    }
 		    recentEntityList.add(new RecentEntity(
 		    		Integer.parseInt(mes[2]), 
-		    		1234,
+		    		"1234",
 		    		"公共测试圆桌",
 		    		mes[1]+" : "+mes[3],
 		    		mes[4],

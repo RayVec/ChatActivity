@@ -3,10 +3,10 @@ import java.io.Serializable;
 
 public class ChatMessage implements Serializable{
 	String type;
-	int sender;
+	String sender;
 	String senderNick;
 	int senderAvatar;
-	int receiver;
+	String receiver;
 	String content;
 	String sendTime;
 	
@@ -16,10 +16,10 @@ public class ChatMessage implements Serializable{
 	public void setType(String type) {
 		this.type = type;
 	}
-	public int getSender() {
+	public String getSender() {
 		return sender;
 	}
-	public void setSender(int sender) {
+	public void setSender(String sender) {
 		this.sender = sender;
 	}
 	public String getSenderNick() {
@@ -34,10 +34,10 @@ public class ChatMessage implements Serializable{
 	public void setSenderAvatar(int senderAvatar) {
 		this.senderAvatar = senderAvatar;
 	}
-	public int getReceiver() {
+	public String getReceiver() {
 		return receiver;
 	}
-	public void setReceiver(int receiver) {
+	public void setReceiver(String receiver) {
 		this.receiver = receiver;
 	}
 	public String getContent() {

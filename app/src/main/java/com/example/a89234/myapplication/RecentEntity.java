@@ -2,13 +2,13 @@ package com.example.a89234.myapplication;
 
 public class RecentEntity {
 	private int avatar;
-	private int account;
+	private String account;
 	private String nick;
 	private String content;
 	private String time;
 	private int unRead;
 
-	public RecentEntity(int avatar,int account,String nick,String content,String time,int unRead){
+	public RecentEntity(int avatar,String account,String nick,String content,String time,int unRead){
 		this.avatar=avatar;
 		this.account=account;
 		this.nick=nick;
@@ -25,11 +25,11 @@ public class RecentEntity {
 		this.avatar = avatar;
 	}
 
-	public int getAccount() {
+	public String getAccount() {
 		return account;
 	}
 
-	public void setAccount(int account) {
+	public void setAccount(String account) {
 		this.account = account;
 	}
 

@@ -30,7 +30,7 @@ public class LoginActivity extends Activity {
 				if(accountEt.getText().equals("") ){
 					Toast.makeText(LoginActivity.this, "账号或密码不能为空！", Toast.LENGTH_SHORT).show();
 				}else{
-					login(Integer.parseInt(accountEt.getText().toString()));
+					login(accountEt.getText().toString());
 				}
 			}
 	    });
@@ -38,7 +38,7 @@ public class LoginActivity extends Activity {
 	    ManageActivity.addActiviy("LoginActivity", this);
 	}
 	
-	void login(int a){
+	void login(String a){
 		User user=new User();
 		user.setAccount(a);
 		user.setOperation("login");
@@ -48,7 +48,7 @@ public class LoginActivity extends Activity {
 		if(b){
 			//转到主界面
 			Intent intent=new Intent(LoginActivity.this,RecentActivity.class);
-			intent.putExtra("account", Integer.parseInt(accountEt.getText().toString()));
+			intent.putExtra("account", accountEt.getText().toString());
 			startActivity(intent);
 		}else {
 			Toast.makeText(this, "登陆失败！", Toast.LENGTH_SHORT).show();

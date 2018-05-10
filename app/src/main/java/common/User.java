@@ -2,7 +2,7 @@ package common;
 
 public class User implements java.io.Serializable{
 	String operation;
-	int account;
+	String account;
 	String password;    //密码
 	String nick;         //昵称
 	int avatar;          //头像
@@ -14,10 +14,10 @@ public class User implements java.io.Serializable{
 	public void setOperation(String operation) {
 		this.operation = operation;
 	}
-	public int getAccount() {
+	public String getAccount() {
 		return account;
 	}
-	public void setAccount(int account) {
+	public void setAccount(String account) {
 		this.account = account;
 	}
 	public String getPassword() {
