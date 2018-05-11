@@ -104,13 +104,25 @@ public class ChatActivity extends Activity {
                     updateChatView(new ChatEntity(
                             chatContent,
                             MyTime.geTime(),
-                            false));
+                            2));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         });
-        //注册广播
+
+        floatingButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                     if(floatingButton.isEnabled()){
+                         floatingButton.setEnabled(false);
+                     }
+                     else{
+                         floatingButton.setEnabled(true);
+                     }
+            }
+        });
+
 
     }
     @Override
@@ -122,6 +134,7 @@ public class ChatActivity extends Activity {
     @Override
     public void onResume(){
         super.onResume();
+        //注册广播
         registerReceiver(br,myIntentFilter);
     }
     //广播接收器
@@ -133,7 +146,7 @@ public class ChatActivity extends Activity {
             updateChatView(new ChatEntity(
                     mes[3],
                     mes[4],
-                    true));
+                    0));
         }
     }
     public void updateChatView(ChatEntity chatEntity){

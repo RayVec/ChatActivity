@@ -41,6 +41,9 @@ public class ClientConServerThread extends Thread {
 					intent.putExtra("message", message);
 					context.sendBroadcast(intent);
 				}
+				else if(m.getType().equals(ChatMessageType.SYSTEM)){
+
+				}
 			} catch (Exception e) {
 				//e.printStackTrace();
 				try {

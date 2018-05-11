@@ -4,12 +4,12 @@ public class ChatEntity {
 	private int avatar;
 	private String content;
 	private String time;
-	private boolean isLeft;//是否为收到的消息，在左边
+	private int type;//0左，1中，2右
 	
-	public ChatEntity(String content,String time,boolean isLeft){
+	public ChatEntity(String content,String time,int type){
 		this.content = content;
 		this.time = time;
-		this.isLeft = isLeft;
+		this.type=type;
 	}
 	
 	public int getAvatar() {
@@ -30,10 +30,10 @@ public class ChatEntity {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	public boolean isLeft() {
-		return isLeft;
+	public int getType() {
+		return type;
 	}
-	public void setLeft(boolean isLeft) {
-		this.isLeft = isLeft;
+	public void setType(int type) {
+		this.type = type;
 	}
 }

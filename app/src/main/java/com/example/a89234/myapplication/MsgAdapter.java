@@ -28,7 +28,7 @@ public class MsgAdapter extends BaseAdapter{
         TextView content;
         TextView time;
         ChatEntity ce=list.get(position);
-        if(ce.isLeft()){
+        if(ce.getType()==0){
             convertView = inflater.inflate(R.layout.chat_listview_item_left, null);
             avatar=(ImageView) convertView.findViewById(R.id.avatar_chat_left);
             content=(TextView) convertView.findViewById(R.id.message_chat_left);
@@ -36,7 +36,13 @@ public class MsgAdapter extends BaseAdapter{
             avatar.setImageResource(ChatActivity.avatar[1]);
             content.setText(ce.getContent());
             time.setText(ce.getTime());
-        }else{
+        }
+        else if(ce.getType()==1){
+            convertView=inflater.inflate(R.layout.chat_listview_item_middle,null);
+            TextView text=convertView.findViewById(R.id.message_chat_middle);
+            text.setText(ce.getContent());
+        }
+        else if(ce.getType()==2){
             convertView=inflater.inflate(R.layout.chat_listview_item_right, null);
             avatar=(ImageView) convertView.findViewById(R.id.avatar_chat_right);
             content=(TextView) convertView.findViewById(R.id.message_chat_right);
