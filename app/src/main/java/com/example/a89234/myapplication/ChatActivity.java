@@ -117,6 +117,12 @@ public class ChatActivity extends Activity {
                 else {
                     Toast.makeText(ChatActivity.this,"发送消息失败，请重试",Toast.LENGTH_SHORT).show();
                 }
+                int b=clearUnread(deskAccount);
+                if(b==1){
+                    Log.d("clearunread","success");
+                }else{
+                    Log.d("clearunread","fail");
+                }
             }
         });
 
