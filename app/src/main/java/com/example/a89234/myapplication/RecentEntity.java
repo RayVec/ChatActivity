@@ -7,6 +7,7 @@ public class RecentEntity {
 	private String content;
 	private String time;
 	private int unRead;
+	private boolean isHost;
 
 	public RecentEntity(int avatar,String account,String nick,String content,String time,int unRead){
 		this.avatar=avatar;
@@ -15,6 +16,8 @@ public class RecentEntity {
 		this.content=content;
 		this.time=time;
 		this.unRead=unRead;
+	}
+	public RecentEntity(){
 	}
 
 	public int getAvatar() {

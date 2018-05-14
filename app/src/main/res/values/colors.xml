@@ -27,4 +27,5 @@
 
     <!--聊天界面-->
     <color name="color_fbutton">#5677fc</color>
+    <color name="color_fbutton1">#CCCCCC</color>
 </resources>

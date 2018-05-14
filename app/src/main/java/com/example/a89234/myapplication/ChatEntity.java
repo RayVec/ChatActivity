@@ -6,12 +6,16 @@ public class ChatEntity {
 	private String time;
 	private int type;//0左，1中，2右
 	
-	public ChatEntity(String content,String time,int type){
+	public ChatEntity(int avatar,String content,String time,int type){
+		this.avatar=avatar;
 		this.content = content;
 		this.time = time;
 		this.type=type;
 	}
-	
+	public ChatEntity(String content,int type){
+		this.content=content;
+		this.type=type;
+	}
 	public int getAvatar() {
 		return avatar;
 	}

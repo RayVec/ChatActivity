@@ -1,6 +1,5 @@
 package com.example.a89234.myapplication;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +9,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class HTTPUtils {
-    public static String getCookie(){
+    public static String cookie;
+    public static String setCookie(){
         String cookie="";
         try {
             // 1. 获取访问地址URL
@@ -42,22 +42,10 @@ public class HTTPUtils {
             out.flush();
             out.close();
             // 从连接中读取响应信息
-            String msg = "";
             cookie=connection.getHeaderField("set-cookie");
             cookie=cookie.substring(0,cookie.indexOf(";"));
-            int code = connection.getResponseCode();
-            if (code == 200) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    msg += line + "\n";
-                }
-                reader.close();
-            }
             // 5. 断开连接
             connection.disconnect();
-
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -66,7 +54,74 @@ public class HTTPUtils {
         // 处理结果
         return cookie;
     }
-    public static void main(String[] args){
-        getCookie();
+    public static String doGet(String target,String cookie){
+        String msg="";
+        try{
+        URL url = new URL(target);
+        // 2. 创建HttpURLConnection对象
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        //设置cookie
+        connection.setRequestProperty("cookie",cookie);
+        // 连接
+        connection.connect();
+        int code = connection.getResponseCode();
+        System.out.println(code);
+        if (code == 200) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(msg);
+                msg += line + "\n";
+            }
+            reader.close();
+        }
+        // 5. 断开连接
+        connection.disconnect();
+    } catch (MalformedURLException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    // 处理结果
+      return msg;
+    }
+    public static String doPost(String target,String cookie,String data){
+        String msg="";
+        try {
+        URL url = new URL(target);
+        // 2. 创建HttpURLConnection对象
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        /* 3. 设置请求参数等 */
+        // 请求方式
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("cookie",cookie);
+        // 连接
+        connection.connect();
+        /* 4. 处理输入输出 */
+        OutputStream out = connection.getOutputStream();
+        out.write(data.getBytes());
+        out.flush();
+        out.close();
+        // 从连接中读取响应信息
+        int code = connection.getResponseCode();
+        System.out.println(code);
+        if (code == 200) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                msg += line + "\n";
+            }
+            reader.close();
+        }
+        // 5. 断开连接
+        connection.disconnect();
+
+    } catch (MalformedURLException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    // 处理结果
+        return msg;
     }
 }

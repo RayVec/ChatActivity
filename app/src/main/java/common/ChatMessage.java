@@ -6,9 +6,11 @@ public class ChatMessage implements Serializable{
 	String sender;
 	String senderNick;
 	int senderAvatar;
-	String receiver;
+	String desk;
+	int deskAvatar;
 	String content;
 	String sendTime;
+	String cookie;
 	
 	public String getType() {
 		return type;
@@ -34,11 +36,11 @@ public class ChatMessage implements Serializable{
 	public void setSenderAvatar(int senderAvatar) {
 		this.senderAvatar = senderAvatar;
 	}
-	public String getReceiver() {
-		return receiver;
+	public String getDesk() {
+		return desk;
 	}
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
+	public void setDesk(String desk) {
+		this.desk = desk;
 	}
 	public String getContent() {
 		return content;
@@ -52,4 +54,8 @@ public class ChatMessage implements Serializable{
 	public void setSendTime(String sendTime) {
 		this.sendTime = sendTime;
 	}
+	public void setCookie(String cookie){this.cookie=cookie;}
+	public String getCookie(){return this.cookie;}
+	public void setDeskAvatar(int deskAvatar){this.deskAvatar=deskAvatar;}
+	public int getDeskAvatar(){return this.deskAvatar;}
 }

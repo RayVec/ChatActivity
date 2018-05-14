@@ -19,7 +19,7 @@ public class ClientConServerThread extends Thread {
 		this.context=context;
 		this.s=s;
 	}
-	
+
 	@Override
 	public void run() {
 		while(true){
@@ -28,23 +28,21 @@ public class ClientConServerThread extends Thread {
 			try {
 				ois = new ObjectInputStream(s.getInputStream());
 				m=(ChatMessage) ois.readObject();
-				if(m.getType().equals(ChatMessageType.COM_MES)){//如果是聊天内容
 					//把从服务器获得的消息通过广播发送
 					//广播内容依次为发送者，发送者昵称，发送者头像，内容，时间
 					Intent intent = new Intent("org.yhn.yq.mes");
 					String[] message=new String[]{
-						m.getSender()+"",
+						m.getType(),
+						m.getDesk()+"",
 						m.getSenderNick(),
 						m.getSenderAvatar()+"",
 						m.getContent(),
-						m.getSendTime()};
+						m.getSendTime(),
+					   };
 					intent.putExtra("message", message);
 					context.sendBroadcast(intent);
 				}
-				else if(m.getType().equals(ChatMessageType.SYSTEM)){
-
-				}
-			} catch (Exception e) {
+			 catch (Exception e) {
 				//e.printStackTrace();
 				try {
 					if(s!=null){

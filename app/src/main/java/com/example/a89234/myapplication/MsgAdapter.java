@@ -15,7 +15,7 @@ public class MsgAdapter extends BaseAdapter{
     private Context context;
     private List<ChatEntity> list;//目前需要显示的所有聊天信息
     private LayoutInflater inflater;
-    private int[] avatar=new int[]{0,R.drawable.h001,R.drawable.h002,R.drawable.h003, R.drawable.h004,R.drawable.h005,R.drawable.h006};
+    private int[] avatars=new int[]{0,R.drawable.h001,R.drawable.h002,R.drawable.h003, R.drawable.h004,R.drawable.h005,R.drawable.h006};
 
     public MsgAdapter(Context context,List<ChatEntity> list){
         this.context = context;
@@ -33,7 +33,7 @@ public class MsgAdapter extends BaseAdapter{
             avatar=(ImageView) convertView.findViewById(R.id.avatar_chat_left);
             content=(TextView) convertView.findViewById(R.id.message_chat_left);
             time=(TextView) convertView.findViewById(R.id.sendtime_chat_left);
-            avatar.setImageResource(ChatActivity.avatar[1]);
+            avatar.setImageResource(avatars[ce.getAvatar()]);
             content.setText(ce.getContent());
             time.setText(ce.getTime());
         }
@@ -43,15 +43,15 @@ public class MsgAdapter extends BaseAdapter{
             text.setText(ce.getContent());
         }
         else if(ce.getType()==2){
+            System.out.println("我的消息");
             convertView=inflater.inflate(R.layout.chat_listview_item_right, null);
             avatar=(ImageView) convertView.findViewById(R.id.avatar_chat_right);
             content=(TextView) convertView.findViewById(R.id.message_chat_right);
             time=(TextView) convertView.findViewById(R.id.sendtime_chat_right);
-            avatar.setImageResource(ChatActivity.avatar[1]);
+            avatar.setImageResource(avatars[ce.getAvatar()]);
             content.setText(ce.getContent());
             time.setText(ce.getTime());
         }
-
         return convertView;
     }
     public int getCount() {
