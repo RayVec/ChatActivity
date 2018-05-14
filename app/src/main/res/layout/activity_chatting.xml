@@ -41,7 +41,6 @@
                 android:layout_gravity="right"
                 android:src="@drawable/rtable" />
         </LinearLayout>
-
         <ListView
             android:id="@+id/lv_chat"
             android:layout_width="match_parent"

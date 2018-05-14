@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -119,7 +120,19 @@ public class ChatActivity extends Activity {
             }
         });
 
-
+        chatListView.setOnTouchListener(new View.OnTouchListener()  {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_MOVE:
+                       floatingButton.setVisibility(View.GONE);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        floatingButton.setVisibility(View.VISIBLE);
+                }
+                return false;//注意此处不能返回true，因为如果返回true,onTouchEvent就无法执行，导致的后果是ListView无法滑动
+            }
+        });
         floatingButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
