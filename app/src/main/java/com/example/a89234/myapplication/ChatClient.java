@@ -38,6 +38,7 @@ public class ChatClient {
 				ChatActivity.myInfo=ms.getContent();
 				//创建一个该账号和服务器保持连接的线程
 				ClientConServerThread ccst=new ClientConServerThread(context,s);
+				ccst.obj=obj;
 				//启动该通信线程
 				ccst.start();
 				//加入到管理类中

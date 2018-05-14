@@ -5,15 +5,24 @@
 package com.example.a89234.myapplication;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
+
 import common.ChatMessage;
 import common.ChatMessageType;
+import common.User;
+
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.LocaleDisplayNames;
+import android.util.Log;
 
 public class ClientConServerThread extends Thread {
 	private Context context;
 	private  Socket s;
+	public Object obj;
 	public Socket getS() {return s;}
 	public ClientConServerThread(Context context,Socket s){
 		this.context=context;
@@ -43,13 +52,32 @@ public class ClientConServerThread extends Thread {
 					context.sendBroadcast(intent);
 				}
 			 catch (Exception e) {
-				//e.printStackTrace();
-				try {
-					if(s!=null){
-						s.close();
+				while(true) {
+					try {
+						s=new Socket();
+						s.connect(new InetSocketAddress("118.24.39.31", 5469), 5000);
+					} catch (SocketTimeoutException s) {
+						Log.d("reconnect","fail");
 					}
-				} catch (IOException e1) {
-					//e1.printStackTrace();
+					catch (IOException e1){
+						Log.d("reconnect","fail");
+					}
+					try {
+						ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
+						oos.writeObject(obj);
+						ObjectInputStream ois1 = new ObjectInputStream(s.getInputStream());
+						ChatMessage ms = (ChatMessage) ois1.readObject();
+						if (ms.getType().equals(ChatMessageType.SUCCESS)) {
+							Log.d("reconnect","success");
+							break;
+						} else if (ms.getType().equals(ChatMessageType.FAIL)) {
+							Log.d("reconnect","fail");
+						}
+				     } catch (IOException e1) {
+					    Log.d("reconnect","fail");
+				     } catch (ClassNotFoundException e1) {
+						Log.d("reconnect","fail");
+				 }
 				}
 			}
 		}
